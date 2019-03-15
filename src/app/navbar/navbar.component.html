@@ -1,0 +1,36 @@
+
+<mat-sidenav-container>
+  <mat-sidenav 
+    class="sidenav-container" 
+    mode="side" 
+    [(opened)]="opened"
+    position="end"
+    >
+    <ul style="list-style-type: none">
+      <li>
+        <button 
+          class="btn-close-menu"
+          mat-mini-fab 
+          *ngIf="opened" 
+          (click)="opened = !opened" 
+          >
+          <fa-icon [icon]="closeIcon"></fa-icon>
+        </button>
+      </li>
+      <li><a routerLink="/logon" (click)="opened = !opened">כניסה לחשבון</a></li>
+      <li><a routerLink="/register" (click)="opened = !opened">פתיחת חשבון</a></li>
+      <li><a routerLink="/credit-card" (click)="opened = !opened">כרטיס אשראי</a></li>
+      <li><a routerLink="/loans" (click)="opened = !opened">הלוואות</a></li>
+    </ul>
+  </mat-sidenav>
+  
+  <mat-sidenav-content
+    class="sidenav-content" 
+    style="text-align: right">
+    <p>
+      <button type="button" *ngIf="!opened" (click)="opened = !opened">
+        <fa-icon [icon]="menuIcon"></fa-icon>
+      </button>
+    </p>
+  </mat-sidenav-content>
+</mat-sidenav-container>

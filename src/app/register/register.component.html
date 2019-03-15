@@ -1,0 +1,26 @@
+<mat-tab-group  
+  animationDuration="0ms"
+  mat-align-tabs="center"
+  [selectedIndex]="tabSelected">
+  <mat-tab 
+    [disabled]="isConfirmationDisabled" 
+    label="אישור">
+    <app-confirmation 
+      (confirmationCompleted)="confirmationProcess($event)">
+    </app-confirmation>
+  </mat-tab>
+  <mat-tab 
+    [disabled]="isContactInfoDisabled" 
+    label="פרטי התקשרות">
+    <app-contact-information 
+      (contactInfoCompleted)="contactInfoProcess($event)">
+    </app-contact-information>
+  </mat-tab>
+  <mat-tab 
+    [disabled]="isPersonalInfoDisabled" 
+    label="מידע אישי">
+    <app-personal-information       
+      (personalInfoCompleted)="personalInfoProcess($event)">
+    </app-personal-information>
+  </mat-tab>
+</mat-tab-group>

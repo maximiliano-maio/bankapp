@@ -17,4 +17,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  closeSidenav() {
+    this.opened = !this.opened;
+  }
+
 }

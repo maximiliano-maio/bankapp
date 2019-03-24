@@ -14,7 +14,7 @@ export class ConfirmationComponent {
   @Output('confirmationCompleted') confirmationCompleted: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
-    this.src = 'assets/poison_permit_general.pdf';
+    this.src = 'assets/contract.pdf';
   }
 
   conditionsAccepted() {

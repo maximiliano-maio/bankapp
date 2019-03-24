@@ -1,0 +1,37 @@
+<div *ngIf="dataSource.length == 0; then message else table"></div>
+<ng-template #message>
+  <h2> אין נתונים להצגה </h2>
+</ng-template>
+<ng-template #table >
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="process">
+      <th mat-header-cell *matHeaderCellDef> תהליך </th>
+      <td mat-cell *matCellDef="let element"> {{element.process}} </td>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> סטאטוס </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+    <ng-container matColumnDef="task">
+      <th mat-header-cell *matHeaderCellDef> שם משימה </th>
+      <td mat-cell *matCellDef="let element"> {{element.task}} </td>
+    </ng-container>
+    <ng-container matColumnDef="clientId">
+      <th mat-header-cell *matHeaderCellDef> ת.ז. </th>
+      <td mat-cell *matCellDef="let element"> {{element.clientId}} </td>
+    </ng-container>
+    <ng-container matColumnDef="clientName">
+      <th mat-header-cell *matHeaderCellDef> שם לקוח </th>
+      <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="system">
+      <th mat-header-cell *matHeaderCellDef> מערכת </th>
+      <td mat-cell *matCellDef="let element"> {{element.system}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</ng-template>
+
+

@@ -1,0 +1,31 @@
+<div dir="rtl" class="row">
+  <div class="col-md-5">
+    <div class="landing-page-buttons">
+      <button>עמוד הבית</button>
+      <label>סביבה: TODO </label>
+      <label>יוזר: TODO </label>
+    </div>
+  </div>
+  <div class="col">
+    <form class="search-form">
+      <label> בחר פרמטר לחיפוש: </label>
+      <mat-radio-group aria-label="Select an option" (change)="onSelectionChange($event)">
+        <mat-radio-button value="לקוח" checked>לקוח</mat-radio-button>
+        <mat-radio-button value="חשבון">חשבון</mat-radio-button>
+        <mat-radio-button value="תהליך">תהליך</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field>
+        <input matInput [placeholder]="placeholder" #inputSearch (keyup.enter)="search(searchFormControl.value)">
+        <mat-hint align="start"><strong>לחץ ENTER לחיפוש תוצאות</strong> </mat-hint>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
+<div class="row processes">
+  <div class="col-md-10">
+    <app-processes-table [processes]="processes"></app-processes-table>
+  </div>
+  <div class="col">
+    <app-processes-tree></app-processes-tree>
+  </div>
+</div>

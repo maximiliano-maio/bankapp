@@ -6,21 +6,21 @@
     [disabled]="isConfirmationDisabled" 
     label="אישור">
     <app-confirmation 
-      (confirmationCompleted)="confirmationProcess($event)">
+      (confirmationCompleted)="confirmationProcess()">
     </app-confirmation>
   </mat-tab>
   <mat-tab 
     [disabled]="isContactInfoDisabled" 
     label="פרטי התקשרות">
     <app-contact-information 
-      (contactInfoCompleted)="contactInfoProcess($event)">
+      (contactInfoCompleted)="contactInfoProcess()">
     </app-contact-information>
   </mat-tab>
   <mat-tab 
     [disabled]="isPersonalInfoDisabled" 
     label="מידע אישי">
     <app-personal-information       
-      (personalInfoCompleted)="personalInfoProcess($event)">
+      (personalInfoCompleted)="personalInfoProcess()">
     </app-personal-information>
   </mat-tab>
 </mat-tab-group>

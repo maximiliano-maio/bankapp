@@ -13,9 +13,9 @@ import { LoansComponent } from './loans/loans.component';
 import {MatButtonModule} from '@angular/material/button';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { PersonalInformationComponent } from './register/personal-information/personal-information.component';
-import { ContactInformationComponent } from './register/contact-information/contact-information.component';
-import { ConfirmationComponent } from './register/confirmation/confirmation.component';
+import { PersonalInformationComponent } from './register/components/personal-information/personal-information.component';
+import { ContactInformationComponent } from './register/components/contact-information/contact-information.component';
+import { ConfirmationComponent } from './register/components/confirmation/confirmation.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -25,6 +25,16 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { HttpClientModule } from '@angular/common/http';
+import { RegistrationService } from './register/services/registration.service';
+import { UserComponent } from './user/user.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { UserValidationComponent } from './user-validation/user-validation.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { ProcessesTableComponent } from './landing-page/processes-table/processes-table.component';
+import { ProcessesTreeComponent } from './landing-page/processes-tree/processes-tree.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+
 
 
 @NgModule({
@@ -37,7 +47,12 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     PersonalInformationComponent,
     ContactInformationComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    UserComponent,
+    UserValidationComponent,
+    LandingPageComponent,
+    ProcessesTableComponent,
+    ProcessesTreeComponent
   ],
   imports: [
     BrowserModule,
@@ -46,10 +61,14 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatSidenavModule,
     RouterModule.forRoot([
+      {path: '', component: LandingPageComponent },
       {path: 'logon', component: LogonComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'credit-card', component: CreditCardComponent},
-      {path: 'loans', component: LoansComponent}
+      {path: 'loans', component: LoansComponent},
+      {path: 'user', component: UserComponent },
+      {path: 'user-validation', component: UserValidationComponent }
+
     ]),
     MatButtonModule,
     MatTabsModule,
@@ -62,9 +81,12 @@ import { HttpClientModule } from '@angular/common/http';
     MatCheckboxModule,
     TextFieldModule,
     PdfViewerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDividerModule,
+    MatTableModule,
+    MatSortModule
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

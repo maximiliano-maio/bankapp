@@ -1,0 +1,23 @@
+mat-radio-button {
+  margin: 10px;
+}
+div.col, .landing-page-buttons {
+  font-size: 15px;
+}
+
+.landing-page-buttons label {
+  padding: 25px;
+}
+
+div.col-md-10 {
+  border-right: solid black 1px;
+}
+
+div.processes {
+  position: absolute;
+  top: 150px;
+  left: 40px;
+  width: 100%;
+}
+
+

@@ -21,22 +21,22 @@ export class PersonalInformationComponent {
   object: Object = {};
   
   firstNameFormControl = new FormControl('', [
-    // Validators.required,
+    Validators.required,
     Validators.maxLength(30)
   ]);
 
   lastNameFormControl = new FormControl('', [
-    // Validators.required,
+    Validators.required,
     Validators.maxLength(30)
   ]);
   maritalStatusFormControl = new FormControl('', [
-    // Validators.required
+    Validators.required
   ]);
   birthDateFormControl = new FormControl('', [
-    // Validators.required
+    Validators.required
   ]);
   idNumberFormControl = new FormControl('', [
-    // Validators.required
+    Validators.required
   ]);
 
   matcher = new MyErrorStateMatcher();
@@ -50,7 +50,7 @@ export class PersonalInformationComponent {
     sessionStorage.setItem('firstName', this.firstNameFormControl.value);
     sessionStorage.setItem('lastName', this.lastNameFormControl.value);
     sessionStorage.setItem('maritalStatus', this.maritalStatusFormControl.value);
-    // sessionStorage.setItem('birthDate', this.birthDateFormControl.value.toDateString());
+    sessionStorage.setItem('birthDate', this.birthDateFormControl.value.toDateString());
     this.personalInfoCompleted.emit(1);
   }
 

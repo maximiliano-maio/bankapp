@@ -1,14 +1,16 @@
 <div>
   <pdf-viewer 
-    [src]="src" 
+    [src]="src"
+    [page]="page" 
     [original-size]="false"
-    [fit-to-page]="true"
-    [show-all]="false">
+    [show-all]="true"
+    style="display: block;">
   </pdf-viewer>
 </div>
 
 <mat-checkbox 
   [disabled]="isConfirmationDisabled" 
-  [(ngModel)]="confirmationChecked">
+  [(ngModel)]="confirmationChecked"
+  (change)="conditionsAccepted()">
   אני מאשר את התנאים
 </mat-checkbox>

@@ -2,15 +2,17 @@ import { ContactInfo } from './contactInfo';
 
 export class Client {
   
-  constructor(contactInfo: ContactInfo) {
-    this.contactInfo = contactInfo;
+ 
+  constructor(c) {
+    this.contactInfo = c;
+    
   }
-  
-  public clientId: String;
-  public firstName: String;
-  public lastName: String;
-  public birthDate: String;
-  public maritalStatus: String;
+
+  clientId: String;
+  firstName: String;
+  lastName: String;
+  birthDate: String;
+  maritalStatus: String;
   contactInfo: ContactInfo;
 
 }

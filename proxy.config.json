@@ -3,5 +3,16 @@
     "target": "http://localhost:8100",
     "secure": false,
     "changeOrigin": false
+  },
+  "/login/user/*": {
+    "target":"http://localhost:8100",
+    "secure":false,
+    "changeOrigin":false
+  },
+  "/getClients": {
+    "target":"http://localhost:8100",
+    "secure":false,
+    "changeOrigin":false
   }
+
 }

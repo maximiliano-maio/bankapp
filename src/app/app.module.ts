@@ -1,3 +1,4 @@
+import { LoginService } from './login/service/login.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -6,7 +7,7 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
-import { LogonComponent } from './logon/logon.component';
+import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CreditCardComponent } from './credit-card/credit-card.component';
 import { LoansComponent } from './loans/loans.component';
@@ -34,13 +35,12 @@ import { ProcessesTableComponent } from './landing-page/processes-table/processe
 import { ProcessesTreeComponent } from './landing-page/processes-tree/processes-tree.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-
+import { DataTableModule } from 'angular-6-datatable';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogonComponent,
     RegisterComponent,
     CreditCardComponent,
     LoansComponent,
@@ -52,7 +52,8 @@ import { MatSortModule } from '@angular/material/sort';
     UserValidationComponent,
     LandingPageComponent,
     ProcessesTableComponent,
-    ProcessesTreeComponent
+    ProcessesTreeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -62,12 +63,13 @@ import { MatSortModule } from '@angular/material/sort';
     MatSidenavModule,
     RouterModule.forRoot([
       {path: '', component: LandingPageComponent },
-      {path: 'logon', component: LogonComponent},
+      {path: 'login', component: LoginComponent},
       {path: 'register', component: RegisterComponent},
       {path: 'credit-card', component: CreditCardComponent},
       {path: 'loans', component: LoansComponent},
-      {path: 'user', component: UserComponent },
-      {path: 'user-validation', component: UserValidationComponent }
+      {path: 'user', component: UserComponent},
+      {path: 'user-validation', component: UserValidationComponent},
+      {path: '**', redirectTo: '' }
 
     ]),
     MatButtonModule,
@@ -84,9 +86,14 @@ import { MatSortModule } from '@angular/material/sort';
     HttpClientModule,
     MatDividerModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    DataTableModule
   ],
-  providers: [MatDatepickerModule, RegistrationService],
+  providers: [
+    MatDatepickerModule, 
+    RegistrationService, 
+    LoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

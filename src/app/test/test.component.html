@@ -1,0 +1,24 @@
+<div class="row">
+  <p>
+    Testing web services:
+  </p>
+</div>
+
+<div class="row">
+  <button type="button" class="btn btn-primary" (click)="setClient()">
+    Send client for registration
+  </button>
+</div>
+<div class="row">
+  <button type="button" class="btn btn-primary" (click)="getClient()">
+    Get client from registration
+  </button>
+</div>
+<div class="row">
+  <ul>
+    <li *ngFor="let client of clients">
+      {{ client.firstName }}
+    </li>
+  </ul>
+
+</div>

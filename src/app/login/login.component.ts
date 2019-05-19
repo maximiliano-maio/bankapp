@@ -1,6 +1,9 @@
-import { LoginService } from './service/login.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+
+import { User } from './../models/user';
+import { AuthService } from './../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,19 +12,40 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  @Output() loginResponse = new EventEmitter<User>(true);
+
+  user: User;
+  isLoginFailed = false;
+
   constructor(
-    private loginService: LoginService,
-    private router: Router) { }
+    public dialogRef: MatDialogRef<LoginComponent>,
+    private authService: AuthService,
+    private route: Router) { }
   
- log(username, password) {
-   console.log(username);
-   // console.log('password: ' + password);
- }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
- login(username, password) {
-   this.loginService.checkCredentials(username, password);
-
- }
+  login(username: string, password: string) {
+    this.authService.login(username, password).subscribe((user: User) => {
+      console.log(user);
+      if (!user) {
+        this.loginResponse.emit(null);
+        this.isLoginFailed = true;
+        console.log('is login failed: ' + this.isLoginFailed);
+      } else {
+        this.loginResponse.emit(user);
+        this.isLoginFailed = false;
+        console.log('is login failed: ' + this.isLoginFailed);
+        sessionStorage.setItem('token', user.hashcode);
+        sessionStorage.setItem('username', user.username);
+      }
+      
+      
+    });
+    
+    // TODO: Redirect to Account page
+  }
 
 
 }

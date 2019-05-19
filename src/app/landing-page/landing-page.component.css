@@ -1,3 +1,8 @@
+p, h1, h2, .jumbotron {
+  direction: rtl;
+  text-align: right;
+}
+
 mat-radio-button {
   margin: 10px;
 }
@@ -20,6 +25,13 @@ div.processes {
   width: 100%;
 }
 
+.navbar-brand {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navbar {
+  background-color: whitesmoke;
+}
 
 
 

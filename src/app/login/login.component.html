@@ -1,44 +1,16 @@
-<div class="row">
-  <form #f="ngForm">
-    <div class="form-group">
-      <label for="username">username</label>
-      <input 
-        #username 
-        name="username" 
-        id="username" 
-        class="form-control" 
-        type="text"
-        required
-      >
-    </div>
-    <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
-      <div *ngIf="username.errors.required">Required</div>
-    </div>
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input 
-        #password 
-        name="password" 
-        id="password" 
-        class="form-control" 
-        type="password"
-        required
-      >
-      <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
-        <div *ngIf="password.errors.required">Required</div>
-      </div>
-    </div>
-    <button 
-      type="button" 
-      class="btn btn-primary"
-      (click)="login(username.value, password.value)">
-      Log in
-    </button>
-    <button 
-      type="button" 
-      class="btn btn-danger" 
-      (click)="getOut()" >
-      Quit
-    </button>
-  </form>
+<h1 mat-dialog-title>אנא להזין שם יוזר וסיסמה</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input type="text" matInput [(ngModel)]="username" placeholder="הזן שם יוזר" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="password" matInput [(ngModel)]="password" placeholder="הזן סיסמה" required>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">בטל</button>
+  <button color="primary" mat-button (click)="login(username, password)" cdkFocusInitial>הכנס</button>
+</div>
+<div>
+  <p class="alert alert-danger" *ngIf="isLoginFailed">שם יוזר או סיסמה לא נכון</p>
 </div>

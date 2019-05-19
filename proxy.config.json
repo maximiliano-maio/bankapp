@@ -4,7 +4,7 @@
     "secure": false,
     "changeOrigin": false
   },
-  "/login/user/*": {
+  "/login/user": {
     "target":"http://localhost:8100",
     "secure":false,
     "changeOrigin":false
@@ -13,6 +13,15 @@
     "target":"http://localhost:8100",
     "secure":false,
     "changeOrigin":false
+  },
+  "/users/*":{
+    "target": "http://localhost:8100",
+    "secure":false,
+    "changeOrigin":false
+  },
+  "/auth/authState":{
+    "target": "http://localhost:8100",
+    "secure": false,
+    "changeOrigin": false
   }
-
 }

@@ -1,9 +1,12 @@
-div.row {
+div, h1 {
   text-align: center;
   align-content: center;
+  direction: ltr;
 }
 
 button {
   margin: 20px;
+  
 }
+
 

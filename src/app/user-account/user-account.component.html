@@ -1,3 +1,80 @@
 
 
-<app-side-navbar [listItems]="userAccountList" ></app-side-navbar>
+<app-side-navbar [listItems]="userAccountList"></app-side-navbar>
+
+<div class="row" style="direction: rtl; text-align: right;">
+  <div class="col-md-8">
+    <div class="card" style="border: none">
+      <div class="card-body">
+        <h5 class="card-title">שלום {{ client?.firstName | async }}</h5>
+      </div>
+    </div>
+    
+    <div class="card" >
+      <div class="card-body">
+        <h5 class="card-title">עובר ושוב</h5>
+        <h6 class="card-subtitle mb-2 text-muted">יתרה</h6>
+        <p class="card-text">
+          {{ balance | currency: 'ILS' : 'symbol' }}
+        </p>
+        <a routerLink="#" class="card-link">העבר כסף</a>
+        <a routerLink="#" class="card-link">פעולות נוספות</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">כרטיס אשראי</h5>
+        <h6 class="card-subtitle mb-2 text-muted">סך החיוב הקרוב עבור {{ creditCardQty }} {{ creditCardSubtitle }}</h6>
+        <p class="card-text">
+          {{ balance | currency: 'ILS' : 'symbol' }}
+        </p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">העברות</h5>
+        <ng-template>
+          <p>little cards rendered using *ngFor 'til 3 on a row</p>
+        </ng-template>
+        <a href="#" class="card-link">העברות נוספות</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">שיקים</h5>
+        <a routerLink="#" class="card-link">לצפיית השיקים שהופקדו</a>
+        <a routerLink="#" class="card-link">לצפיית השיקים שנמשכו</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">מו''ח שוטף</h5>
+        <h6 class="card-subtitle mb-2 text-muted">יתרה</h6>
+        <p class="card-text">
+          {{ balanceUSD | currency: 'USD' : 'symbol' }}
+        </p>
+        <a routerLink="#" class="card-link">העבר כסף</a>
+        <a routerLink="#" class="card-link">פעולות נוספות</a>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col">
+    <div class="card" style="width: 100%;">
+      <div class="card-body">
+        <h5 class="card-title">תנועות בחשבון</h5>
+        <h6 class="card-subtitle mb-2 text-muted">יתרה</h6>
+        <p class="card-text">
+          Account's movements
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

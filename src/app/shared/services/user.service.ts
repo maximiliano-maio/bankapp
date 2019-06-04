@@ -23,17 +23,20 @@ export class UserService {
   }
 
   getClient(hashcode: string): Observable<Client> {
-    return this.http.get<Client>('/users/', {
-      params: {code: hashcode}
-    });
+    let options = {
+      params: { code: hashcode }
+    };
+    
+    return this.http.get<Client>('/user/', options);
   }
 
   getAllClients(): Observable<Client[]> {
     return this.http.get<Client[]>('/getClients');
   }
 
-  getClientlocally(): string {
-    return sessionStorage.getItem('username');
+  // TODO: Get Hashcode locally..
+  getHashcodeLocally(): string {
+    return sessionStorage.getItem('token');
   }
 
   

@@ -16,8 +16,9 @@
           <fa-icon [icon]="closeIcon"></fa-icon>
         </button>
       </li>
-      <li><a (click)="closeSidenav()" routerLink="#"></a></li>
-      <li><a (click)="closeSidenav()" routerLink="#"></a></li>
+      <li *ngFor="let item of listItems">
+        <a (click)="closeSidenav()" [routerLink]="item.link">{{ item.name }}</a>
+      </li>
     </ul>
   </mat-sidenav>
   

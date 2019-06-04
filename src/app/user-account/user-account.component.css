@@ -1,0 +1,9 @@
+div {
+  direction: rtl; 
+  text-align: right;
+  width: 100%;
+}
+
+a, div.card {
+  margin: 10px;
+}

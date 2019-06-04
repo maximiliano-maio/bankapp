@@ -38,7 +38,7 @@ export class LoginComponent {
         this.isLoginFailed = false;
         console.log('is login failed: ' + this.isLoginFailed);
         sessionStorage.setItem('token', user.hashcode);
-        sessionStorage.setItem('username', user.username);
+        
       }
       
       

@@ -36,8 +36,8 @@ import { ContactInformationComponent } from './register/components/contact-infor
 import { PersonalInformationComponent } from './register/components/personal-information/personal-information.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './shared/services/auth-guard.service';
+import { AuthService } from './shared/services/auth.service';
 import { UserService } from './shared/services/user.service';
-import { TestComponent } from './test/test.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserValidationComponent } from './user-validation/user-validation.component';
 import { UserComponent } from './user/user.component';
@@ -58,7 +58,6 @@ import { UserComponent } from './user/user.component';
     ProcessesTableComponent,
     ProcessesTreeComponent,
     LoginComponent,
-    TestComponent,
     ProcessesComponent,
     UserAccountComponent
   ],
@@ -71,13 +70,13 @@ import { UserComponent } from './user/user.component';
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent},
       { path: 'register', component: RegisterComponent},
-      { path: 'credit-card', component: CreditCardComponent, canActivate: [AuthGuardService]},
-      { path: 'loans', component: LoansComponent, canActivate: [AuthGuardService] },
-      { path: 'user', component: UserComponent, canActivate: [AuthGuardService]},
+      { path: 'account/:hashcode/credit-card', component: CreditCardComponent},
+      { path: 'loans', component: LoansComponent},
+      { path: 'user', component: UserComponent},
       { path: 'user-validation', component: UserValidationComponent},
-      { path: 'account/:hashcode', component: UserAccountComponent },
-      { path: '', component: LandingPageComponent },
-      { path: '**', redirectTo: '' }
+      { path: 'account/:id', component: UserAccountComponent},
+      { path: '', component: LandingPageComponent}
+      // ,{ path: '**', redirectTo: '' }
 
     ]),
     MatButtonModule,
@@ -101,7 +100,8 @@ import { UserComponent } from './user/user.component';
   providers: [
     MatDatepickerModule, 
     UserService, 
-    AuthGuardService
+    AuthGuardService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

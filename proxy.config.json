@@ -14,14 +14,19 @@
     "secure":false,
     "changeOrigin":false
   },
-  "/users/*":{
+  "/user/*":{
     "target": "http://localhost:8100",
     "secure":false,
     "changeOrigin":false
   },
-  "/auth/authState":{
+  "/auth/authState/*":{
     "target": "http://localhost:8100",
     "secure": false,
     "changeOrigin": false
+  },
+  "/getAccounting/*": {
+    "target": "http://localhost:8100",
+    "secure":false,
+    "changeOrigin":false
   }
 }

@@ -28,5 +28,10 @@
     "target": "http://localhost:8100",
     "secure":false,
     "changeOrigin":false
+  },
+  "/logout": {
+    "target":"http://localhost:8100",
+    "secure": false,
+    "changeOrigin":false
   }
 }

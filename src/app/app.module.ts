@@ -38,6 +38,12 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { AuthService } from './shared/services/auth.service';
 import { UserService } from './shared/services/user.service';
+import { OperationsComponent } from './user-account/add-op/operations/operations.component';
+import { CashedChecksComponent } from './user-account/checks/cash/cashed-checks/cashed-checks.component';
+import { CheckOrdersComponent } from './user-account/checks/check-orders.component';
+import { DepositedChecksComponent } from './user-account/checks/deposits/deposited-checks/deposited-checks.component';
+import { IlsMovementsComponent } from './user-account/movements/ils-movements/ils-movements.component';
+import { TransferMainComponent } from './user-account/transfers/transfer-main/transfer-main.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserValidationComponent } from './user-validation/user-validation.component';
 import { UserComponent } from './user/user.component';
@@ -59,7 +65,13 @@ import { UserComponent } from './user/user.component';
     ProcessesTreeComponent,
     LoginComponent,
     ProcessesComponent,
-    UserAccountComponent
+    UserAccountComponent,
+    CheckOrdersComponent,
+    DepositedChecksComponent,
+    CashedChecksComponent,
+    TransferMainComponent,
+    OperationsComponent,
+    IlsMovementsComponent
   ],
   imports: [
     BrowserModule,
@@ -68,16 +80,25 @@ import { UserComponent } from './user/user.component';
     BrowserAnimationsModule,
     MatSidenavModule,
     RouterModule.forRoot([
+      { path: 'account/:id/checkorders', component: CheckOrdersComponent },
+      { path: 'account/:id/cashedChecks', component: CashedChecksComponent },
+      { path: 'account/:id/depositedChecks', component: DepositedChecksComponent },
+      { path: 'account/:id/additional-op', component: OperationsComponent },
+      { path: 'account/:id/movements', component: IlsMovementsComponent },
+      { path: 'account/:id/config', component: UserComponent },
+      
+      { path: 'account/:id/transfers', component: TransferMainComponent },
+
+      { path: 'account/:id/credit-card', component: CreditCardComponent },
+      
+      { path: 'account/:id', component: UserAccountComponent },
+
       { path: 'login', component: LoginComponent},
       { path: 'register', component: RegisterComponent},
-      { path: 'account/:hashcode/credit-card', component: CreditCardComponent},
       { path: 'loans', component: LoansComponent},
       { path: 'user', component: UserComponent},
       { path: 'user-validation', component: UserValidationComponent},
-      { path: 'account/:id', component: UserAccountComponent},
       { path: '', component: LandingPageComponent}
-      // ,{ path: '**', redirectTo: '' }
-
     ]),
     MatButtonModule,
     MatTabsModule,

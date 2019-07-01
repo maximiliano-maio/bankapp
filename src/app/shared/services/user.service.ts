@@ -27,7 +27,7 @@ export class UserService {
       params: { code: hashcode }
     };
     
-    return this.http.get<Client>('/user/', options);
+    return this.http.get<Client>('/user', options);
   }
 
   getAllClients(): Observable<Client[]> {

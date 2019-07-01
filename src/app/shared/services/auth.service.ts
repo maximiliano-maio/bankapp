@@ -30,14 +30,14 @@ export class AuthService {
     });
 
     let options = { headers: header };
-
+    
     return this.http.post<Object>('/login/user', {
       username: username,
       password: password
     }, options);
   }
 
-  isLoggedIn(hashcode: string): boolean {
+  isLoggedIn(hashcode: string) {
 
     if (hashcode == null) {
       this.router.navigate(['/']);
@@ -52,22 +52,25 @@ export class AuthService {
     this.http.get<number>('/auth/authState', options).subscribe(
       (status: number) => {
         if (status < 1) {
-        this.router.navigate(['/']);
-        return false;
+          this.router.navigate(['/']);
+          return false;
         }
+
         return true;
       }
-
     );
-
-
-
-
-
   }
 
-  // TODO: not implemented on server.
-  logout() {
-
+  // TODO: implementation on server.
+  logout(hashcode: string) {
+    let options = {
+      params: {
+        code: hashcode
+      }
+    };
+    this.http.get<boolean>('/logout', options).subscribe(
+      (logout) => {
+        if (logout) sessionStorage.removeItem('token');
+    });
   }
 }

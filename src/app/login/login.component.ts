@@ -15,7 +15,6 @@ export class LoginComponent {
   @Output() loginResponse = new EventEmitter<User>(true);
 
   user: User;
-  isLoginFailed = false;
 
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
@@ -28,15 +27,16 @@ export class LoginComponent {
 
   login(username: string, password: string) {
     this.authService.login(username, password).subscribe((user: User) => {
+      
+      // for testing purpose:
       console.log(user);
+      
       if (!user) {
         this.loginResponse.emit(null);
-        this.isLoginFailed = true;
-        console.log('is login failed: ' + this.isLoginFailed);
+        console.log('login failed.');
       } else {
         this.loginResponse.emit(user);
-        this.isLoginFailed = false;
-        console.log('is login failed: ' + this.isLoginFailed);
+        console.log('login succeed.');
         sessionStorage.setItem('token', user.hashcode);
         
       }

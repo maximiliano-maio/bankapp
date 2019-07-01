@@ -13,9 +13,6 @@ import { User } from './../models/user';
 })
 export class LandingPageComponent implements OnDestroy {
   
-
-  username: String;
-  password: String;
   subscription: Subscription;
   loginDialogOpened: Boolean;
 

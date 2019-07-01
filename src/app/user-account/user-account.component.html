@@ -3,10 +3,10 @@
 <app-side-navbar [listItems]="userAccountList"></app-side-navbar>
 
 <div class="row" style="direction: rtl; text-align: right;">
-  <div class="col-md-8">
+  <div class="col-md-7">
     <div class="card" style="border: none">
       <div class="card-body">
-        <h5 class="card-title">שלום {{ client?.firstName | async }}</h5>
+        <h5 class="card-title">שלום {{ client?.firstName }}</h5>
       </div>
     </div>
     
@@ -15,10 +15,11 @@
         <h5 class="card-title">עובר ושוב</h5>
         <h6 class="card-subtitle mb-2 text-muted">יתרה</h6>
         <p class="card-text">
-          {{ balance | currency: 'ILS' : 'symbol' }}
+          {{ lastBalance?.balance | currency: 'ILS' : 'symbol' }}
         </p>
-        <a routerLink="#" class="card-link">העבר כסף</a>
-        <a routerLink="#" class="card-link">פעולות נוספות</a>
+        <a [routerLink]="[currentUrl, 'transfers']" class="card-link">העבר כסף</a>
+        <a [routerLink]="[currentUrl, 'additional-op']" class="card-link">פעולות נוספות</a>
+        <a [routerLink]="[currentUrl, 'movements']" class="card-link">תנועות בחשבון</a>
       </div>
     </div>
 
@@ -27,10 +28,8 @@
         <h5 class="card-title">כרטיס אשראי</h5>
         <h6 class="card-subtitle mb-2 text-muted">סך החיוב הקרוב עבור {{ creditCardQty }} {{ creditCardSubtitle }}</h6>
         <p class="card-text">
-          {{ balance | currency: 'ILS' : 'symbol' }}
+          {{ creditCardDebt | currency: 'ILS' : 'symbol' }}
         </p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
       </div>
     </div>
 
@@ -40,40 +39,38 @@
         <ng-template>
           <p>little cards rendered using *ngFor 'til 3 on a row</p>
         </ng-template>
-        <a href="#" class="card-link">העברות נוספות</a>
+        <a [routerLink]="[currentUrl, 'transfers']" class="card-link">העברות</a>
       </div>
     </div>
 
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">שיקים</h5>
-        <a routerLink="#" class="card-link">לצפיית השיקים שהופקדו</a>
-        <a routerLink="#" class="card-link">לצפיית השיקים שנמשכו</a>
+        <a [routerLink]="[currentUrl, 'depositedChecks']" class="card-link">לצפיית השיקים שהופקדו</a>
+        <a [routerLink]="[currentUrl, 'cashedChecks']" class="card-link">לצפיית השיקים שנמשכו</a>
+        <a [routerLink]="[currentUrl, 'checkorders']" class="card-link">הזמנות</a>
       </div>
     </div>
-
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">מו''ח שוטף</h5>
-        <h6 class="card-subtitle mb-2 text-muted">יתרה</h6>
-        <p class="card-text">
-          {{ balanceUSD | currency: 'USD' : 'symbol' }}
-        </p>
-        <a routerLink="#" class="card-link">העבר כסף</a>
-        <a routerLink="#" class="card-link">פעולות נוספות</a>
-      </div>
-    </div>
-
-
   </div>
   <div class="col">
     <div class="card" style="width: 100%;">
       <div class="card-body">
         <h5 class="card-title">תנועות בחשבון</h5>
         <h6 class="card-subtitle mb-2 text-muted">יתרה</h6>
-        <p class="card-text">
-          Account's movements
-        </p>
+        <table style="text-align: right;">
+          <ng-container *ngFor="let b of balanceList">
+            <tr>
+              <td>
+                {{ b.date | date }} 
+              </td>
+              <td style="text-align: right; width: 40%">
+                {{ b.description }} 
+              </td>
+              <td *ngIf="b.debt > 0" style="color: red; text-align: left"> {{ b.debt | currency: 'ILS' : 'symbol' }} </td>
+              <td *ngIf="b.credit > 0" style="color: green; text-align: left"> {{ b.credit | currency: 'ILS' : 'symbol' }} </td>
+            </tr>
+          </ng-container>
+        </table>
       </div>
     </div>
   </div>

@@ -19,6 +19,11 @@
       <li *ngFor="let item of listItems">
         <a (click)="closeSidenav()" [routerLink]="item.link">{{ item.name }}</a>
       </li>
+      <li>
+        <a (click)="logout()">
+          צא מחשבונך
+        </a>
+      </li>
     </ul>
   </mat-sidenav>
   

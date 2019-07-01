@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Accounting } from './../../models/accounting';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -11,11 +9,11 @@ export class AccountingService {
 
   constructor(private http: HttpClient) { }
 
-  getAccounting(hashcode: string): Observable<Accounting> {
+  getAccounting(hashcode: string): Observable<any> {
     let options = {
       params: { code: hashcode}
     };
-    return this.http.get<Accounting>('/getAccounting', options);
+    return this.http.get<any>('/getAccounting', options);
   }
 
 }

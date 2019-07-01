@@ -1,8 +1,9 @@
 import { AfterContentInit, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { Accounting } from './../models/accounting';
 import { Client } from './../models/client';
+import { AccountingService } from './../shared/services/accounting.service';
 import { AuthService } from './../shared/services/auth.service';
 import { UserService } from './../shared/services/user.service';
 
@@ -13,7 +14,12 @@ import { UserService } from './../shared/services/user.service';
 })
 export class UserAccountComponent implements AfterContentInit {
   
-  client: Observable<Client>;
+  client: Client;
+  balanceList: Accounting[];
+  lastBalance: Accounting;
+  currentUrl: String;
+  creditCardDebt: number;
+
   balance: number = 10;
   balanceUSD: number = 10;
 
@@ -23,23 +29,34 @@ export class UserAccountComponent implements AfterContentInit {
   // shekelIcon = faShekelSign;
   userAccountList = [
     { name: 'כרטיס אשראי', link: 'credit-card' },
-    { name: 'הלוואות', link: 'loans' }
+    { name: 'הלוואות', link: 'loans' },
+    { name: 'הגדרות', link: 'config' }
   ];
 
   constructor(
     private authService: AuthService,
     private userService: UserService,
-    private route: ActivatedRoute) { 
+    private route: ActivatedRoute,
+    private router: Router,
+    private accountingService: AccountingService) { 
       
     }
   
-  async ngAfterContentInit() {
-    let id: string = this.route.snapshot.params.id || this.userService.getHashcodeLocally();
-    this.authService.isLoggedIn(id);
-    await this.userService.getClient(id)
-      .subscribe((client) => {
-        console.log(client);
+  ngAfterContentInit() {
+    let hashcode: string = this.route.snapshot.params.id || this.userService.getHashcodeLocally();
+    this.authService.isLoggedIn(hashcode);
+
+    this.userService.getClient(hashcode).subscribe(client => {
+      this.client = client;
+    });
+      
+    this.accountingService.getAccounting(hashcode).subscribe((accounting: Accounting[]) => {
+      
+      this.lastBalance = accounting[accounting.length - 1];
+
+      this.balanceList = accounting;
+      this.currentUrl = this.router.url;
+      
     });
   }
-
 }

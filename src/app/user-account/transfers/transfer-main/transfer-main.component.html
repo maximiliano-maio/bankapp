@@ -1,3 +1,119 @@
-<p>
-  transfer-main works!
-</p>
+<div class="row">
+  <app-side-navbar [listItems]="transferMainList"></app-side-navbar>
+</div>
+<div class="row" *ngIf="secondConfirmation && !firstConfirmation">
+  <h3>שלב 3 מתוך 3</h3>
+  <h4>שמור פרטי ההעברה</h4>
+</div>  
+<div class="row" *ngIf="firstConfirmation && !secondConfirmation">
+  <div>
+    <div class="form-group">
+      <h3>שלב 2 מתוך 3</h3>
+      <h4>אנא לוודא שהפרטים נכונים</h4>
+    </div>
+    
+    <div class="form-group">
+      <label>מספר חשבון המוטב </label>
+      <p>{{ returnedDataTransfer.accountNumber }}</p>
+    </div>
+    <div class="form-group">
+      <label>שם המוטב</label>
+      <p>{{ returnedDataTransfer.beneficiary }}</p>
+    </div>
+    <div class="form-group">
+      <label>סכום</label>
+      <p>{{ returnedDataTransfer.amount | currency: 'ILS' : 'symbol' }}</p>
+    </div>
+    <div class="form-group">
+      <label>עמלה</label>
+      <p>{{ returnedDataTransfer.commission | currency: 'ILS' : 'symbol' }}</p>
+    </div>
+    <div class="form-group">
+      <label>סיבה</label>
+      <div [ngSwitch]="returnedDataTransfer.reason">
+        <div *ngSwitchCase="1">שכירות</div>
+        <div *ngSwitchCase="2">תשלום</div>
+        <div *ngSwitchCase="3">מתנה</div>
+        <div *ngSwitchCase="4">אחר</div>
+      </div>
+    </div>
+    
+    <button type="button" (click)="approveTransfer()" class="btn btn-primary">אשר</button>
+    <button type="button" (click)="cancelTransfer()" class="btn btn-danger">בטל</button>
+  </div>
+  
+  
+</div>
+<div class="row" style="margin-right: 100px;" *ngIf="!firstConfirmation && !secondConfirmation">
+  <form #f="ngForm" (ngSubmit)="verification(f.value)">
+    <h3>שלב 1 מתוך 3</h3>
+    <h4>אנא למלא את פרטי ההעברה</h4>
+    <div class="form-group">
+      <label for="accountNumber">מספר חשבון המוטב</label>
+      <input 
+        type="number" 
+        #accountNumber="ngModel"
+        (ngModel)="accountNumber"
+        id="accountNumber"
+        name="accountNumber"
+        class="form-control"
+        required>
+      <div class="alert alert-danger" *ngIf="accountNumber.touched && accountNumber.invalid">
+        מספר חשבון חובה
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="beneficiary">שם המוטב</label>
+      <input 
+        type="text" 
+        #beneficiary="ngModel"
+        (ngModel)="beneficiary" 
+        id="beneficiary" 
+        name="beneficiary" 
+        class="form-control"
+        required>
+      <div class="alert alert-danger" *ngIf="beneficiary.touched && beneficiary.invalid">
+        שם המוטב חובה
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="amount">סכום</label>
+      <input 
+        type="number" 
+        #amount="ngModel"
+        (ngModel)="amount" 
+        id="amount" 
+        name="amount" 
+        class="form-control"
+        required>
+      <div class="alert alert-danger" *ngIf="amount.touched && amount.invalid">
+        הסכום חובה
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="reason">סיבה</label>
+      <select 
+        #reason="ngModel"
+        (ngModel)="reason" 
+        name="reason" 
+        id="reason" 
+        class="form-control"
+        required>
+        <option value=""></option>
+        <option *ngFor="let r of reasons" [value]="r.key">
+          {{ r.name }}
+        </option>
+      </select>
+      <div class="alert alert-danger" *ngIf="reason.touched && reason.invalid">
+        הסיבה חובה
+      </div>
+    </div>
+    <button class="btn btn-primary">אשר</button>
+    <button type="button" (click)="cancelTransfer()" class="btn btn-danger">מחק</button>
+  </form>
+  <div *ngIf="error">
+    <p class="alert alert-danger">לא ניתן להעביר סכום זה</p>
+  </div>
+  
+</div>
+ 

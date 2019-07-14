@@ -1,3 +1,22 @@
-<p>
-  ils-movements works!
-</p>
+<app-side-navbar [listItems]="accountMovementsList"></app-side-navbar>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">יתרה</th>
+      <th scope="col">חיוב</th>
+      <th scope="col">זיכוי</th>
+      <th scope="col">תיאור</th>
+      <th scope="col">תאריך</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let b of balanceList">
+      <th scope="col">{{ b.balance }}</th>
+      <th scope="col">{{ b.debt }}</th>
+      <th scope="col">{{ b.credit }}</th>
+      <th scope="col">{{ b.description }}</th>
+      <th scope="col">{{ b.date | date }}</th>
+    </tr>
+  </tbody>
+</table>

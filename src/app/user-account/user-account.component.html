@@ -18,7 +18,7 @@
           {{ lastBalance?.balance | currency: 'ILS' : 'symbol' }}
         </p>
         <a [routerLink]="[currentUrl, 'transfers']" class="card-link">העבר כסף</a>
-        <a [routerLink]="[currentUrl, 'additional-op']" class="card-link">פעולות נוספות</a>
+        <a [routerLink]="[currentUrl, 'standing-orders']" class="card-link">הוראות קבע</a>
         <a [routerLink]="[currentUrl, 'movements']" class="card-link">תנועות בחשבון</a>
       </div>
     </div>
@@ -60,7 +60,7 @@
         <table style="text-align: right;">
           <ng-container *ngFor="let b of balanceList">
             <tr>
-              <td>
+              <td style="width: 40%">
                 {{ b.date | date }} 
               </td>
               <td style="text-align: right; width: 40%">

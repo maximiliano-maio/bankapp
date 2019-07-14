@@ -50,9 +50,9 @@ export class UserAccountComponent implements AfterContentInit {
       this.client = client;
     });
       
-    this.accountingService.getAccounting(hashcode).subscribe((accounting: Accounting[]) => {
+    this.accountingService.getShortAccountBalances(hashcode).subscribe((accounting: Accounting[]) => {
       
-      this.lastBalance = accounting[accounting.length - 1];
+      this.lastBalance = accounting[0];
 
       this.balanceList = accounting;
       this.currentUrl = this.router.url;

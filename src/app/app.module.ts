@@ -1,4 +1,5 @@
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +39,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { AuthService } from './shared/services/auth.service';
 import { UserService } from './shared/services/user.service';
-import { OperationsComponent } from './user-account/add-op/operations/operations.component';
+import { StandingOrdersComponent } from './user-account/add-op/standing-orders/standing-orders.component';
 import { CashedChecksComponent } from './user-account/checks/cash/cashed-checks/cashed-checks.component';
 import { CheckOrdersComponent } from './user-account/checks/check-orders.component';
 import { DepositedChecksComponent } from './user-account/checks/deposits/deposited-checks/deposited-checks.component';
@@ -70,11 +71,13 @@ import { UserComponent } from './user/user.component';
     DepositedChecksComponent,
     CashedChecksComponent,
     TransferMainComponent,
-    OperationsComponent,
-    IlsMovementsComponent
+    IlsMovementsComponent,
+    StandingOrdersComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
@@ -83,7 +86,7 @@ import { UserComponent } from './user/user.component';
       { path: 'account/:id/checkorders', component: CheckOrdersComponent },
       { path: 'account/:id/cashedChecks', component: CashedChecksComponent },
       { path: 'account/:id/depositedChecks', component: DepositedChecksComponent },
-      { path: 'account/:id/additional-op', component: OperationsComponent },
+      { path: 'account/:id/standing-orders', component: StandingOrdersComponent },
       { path: 'account/:id/movements', component: IlsMovementsComponent },
       { path: 'account/:id/config', component: UserComponent },
       
@@ -105,8 +108,6 @@ import { UserComponent } from './user/user.component';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatRadioModule,
     MatCheckboxModule,
     TextFieldModule,
@@ -116,7 +117,8 @@ import { UserComponent } from './user/user.component';
     MatTableModule,
     MatSortModule,
     DataTableModule,
-    MatDialogModule
+    MatDialogModule,
+    CommonModule
   ],
   providers: [
     MatDatepickerModule, 

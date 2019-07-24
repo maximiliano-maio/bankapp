@@ -45,15 +45,13 @@ export class UserAccountComponent implements AfterContentInit {
   ngAfterContentInit() {
     let hashcode: string = this.route.snapshot.params.id || this.userService.getHashcodeLocally();
     this.authService.isLoggedIn(hashcode);
-
+    
     this.userService.getClient(hashcode).subscribe(client => {
       this.client = client;
     });
       
     this.accountingService.getShortAccountBalances(hashcode).subscribe((accounting: Accounting[]) => {
-      
       this.lastBalance = accounting[0];
-
       this.balanceList = accounting;
       this.currentUrl = this.router.url;
       

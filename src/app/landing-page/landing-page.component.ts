@@ -44,6 +44,7 @@ export class LandingPageComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if (this.subscription)
     this.subscription.unsubscribe();
   }
 

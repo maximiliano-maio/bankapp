@@ -25,8 +25,10 @@ export class TransferMainComponent {
   firstConfirmation: boolean;
   secondConfirmation: boolean;
   error: boolean;
-  returnedDataTransfer: Transfer;
+  firstConfirmationData: Transfer;
+  secondConfirmationData: Accounting;
   url: String;
+  backToAccountPageUrl: String;
 
   constructor(
     private router: Router,
@@ -35,6 +37,10 @@ export class TransferMainComponent {
     this.secondConfirmation = false;
     this.error = false;
     this.url = this.router.url;
+    this.backToAccountPageUrl = this.router.url.substring(0, this.router.url.lastIndexOf('/'));
+    this.transferMainList = [
+      { name: 'חזור לחשבונך', link: this.backToAccountPageUrl }
+    ];
   }
 
   verification(data) {
@@ -42,7 +48,7 @@ export class TransferMainComponent {
     Object.assign(data, { hashcode: h });
     console.log(data);
     this.accountingService.verifyAccount(data).subscribe((d: Transfer) => {
-      this.returnedDataTransfer = d;
+      this.firstConfirmationData = d;
       
       if (d.transferPossible) {
         this.firstConfirmation = true;
@@ -56,19 +62,34 @@ export class TransferMainComponent {
   }
 
   approveTransfer() {
-    this.accountingService.setTransfer(this.returnedDataTransfer).subscribe(
+    this.accountingService.setTransfer(this.firstConfirmationData).subscribe(
       (b: Accounting) => {
-        console.log(b);
+        this.secondConfirmationData = b;
+        this.backToAccountPageUrl = this.router.url.substring(0, this.router.url.lastIndexOf('/'));
+        console.log(this.backToAccountPageUrl);
+        if (b.id) {
+          this.secondConfirmation = true;
+          this.firstConfirmation = false;
+        } else {
+          this.error = true;
+          this.secondConfirmation = false;
+          this.firstConfirmation = false;
+        }
+      
     });
   }
 
   cancelTransfer() {
-    this.returnedDataTransfer = null;
+    this.firstConfirmationData = null;
     this.firstConfirmation = false;
     this.secondConfirmation = false;
     this.error = false;
     
     this.router.navigate([this.url]);
+  }
+
+  backToAccountPage() {
+    this.router.navigate([this.backToAccountPageUrl]);
   }
 
 }

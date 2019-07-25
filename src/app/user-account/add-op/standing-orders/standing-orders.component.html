@@ -1,3 +1,56 @@
-<p>
-  standing-orders works!
-</p>
+<div class="row" style="margin-right: 100px;">
+  <form #f="ngForm" (ngSubmit)="verification(f.value)">
+    <h3>הוראת קבע</h3>
+    <h4>אנא למלא את פרטים</h4>
+    <div class="form-group">
+      <label for="companyName">שם חברה</label>
+      <input type="text" #companyName="ngModel" (ngModel)="companyName" id="companyName" name="companyName"
+        class="form-control" required>
+      <div class="alert alert-danger" *ngIf="companyName.touched && companyName.invalid">
+        שם חברה חובה
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="beneficiary">בחר תאריך תחילת</label>
+      
+      <div class="input-group">
+        <input 
+          class="form-control" 
+          placeholder="yyyy-mm-dd" 
+          name="dp" [(ngModel)]="model" 
+          ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button 
+            class="btn btn-outline-secondary calendar" 
+            (click)="d.toggle()" 
+            type="button">
+          </button>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="beneficiary.touched && beneficiary.invalid">
+        שם המוטב חובה
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="amount">סכום</label>
+      <input type="number" #amount="ngModel" (ngModel)="amount" id="amount" name="amount" class="form-control" required>
+      <div class="alert alert-danger" *ngIf="amount.touched && amount.invalid">
+        הסכום חובה
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="frecuency">תדירות</label>
+      <select #frecuency="ngModel" (ngModel)="frecuency" name="frecuency" id="frecuency" class="form-control" required>
+        <option value=""></option>
+        <option *ngFor="let f of frecuency" [value]="f.key">
+          {{ f.name }}
+        </option>
+      </select>
+      <div class="alert alert-danger" *ngIf="frecuency.touched && frecuency.invalid">
+        תדירות חובה
+      </div>
+    </div>
+    <button class="btn btn-primary">אשר</button>
+    <button class="btn btn-danger" type="button" (click)="cancelTransfer()">מחק</button>
+    <button class="btn btn-info" type="button" (click)="backToAccountPage()">חזור לחשבונך</button>

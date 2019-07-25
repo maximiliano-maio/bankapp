@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendarGregorian } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import { DataTableModule } from 'angular-6-datatable';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
@@ -118,6 +119,7 @@ import { UserComponent } from './user/user.component';
     MatSortModule,
     DataTableModule,
     MatDialogModule,
+    NgbCalendarGregorian,
     CommonModule
   ],
   providers: [

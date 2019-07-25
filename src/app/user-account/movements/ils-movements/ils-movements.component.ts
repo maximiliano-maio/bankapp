@@ -30,7 +30,6 @@ export class IlsMovementsComponent implements AfterContentInit {
 
     this.accountingService.getLongAccountBalances(hashcode).subscribe((accounting: Accounting[]) => {
       this.balanceList = accounting;
-      console.log(this.balanceList);
     });
   }
 

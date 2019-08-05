@@ -46,7 +46,6 @@ export class TransferMainComponent {
   verification(data) {
     let h = this.router.url.substring( 9 , this.router.url.lastIndexOf('/'));
     Object.assign(data, { hashcode: h });
-    console.log(data);
     this.accountingService.verifyAccount(data).subscribe((d: Transfer) => {
       this.firstConfirmationData = d;
       

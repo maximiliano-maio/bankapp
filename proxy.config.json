@@ -48,5 +48,15 @@
     "target":"http://localhost:8100",
     "secure":false,
     "changeOrigin":false
+  },
+  "/setStandingOrder": {
+    "target": "http://localhost:8100",
+    "secure":false,
+    "changeOrigin":false
+  },
+  "/getStandingOrders": {
+    "target": "http://localhost:8100",
+    "secure": false,
+    "changeOrigin": false
   }
 }

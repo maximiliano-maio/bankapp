@@ -3,10 +3,9 @@ div, h1 {
   align-content: center;
   direction: ltr;
 }
-
-button {
-  margin: 20px;
-  
+div > button {
+  margin-left: 80px;
+  font-size: 110%;
 }
 
 

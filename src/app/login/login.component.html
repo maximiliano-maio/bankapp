@@ -4,12 +4,18 @@
     <input type="text" matInput [(ngModel)]="username" placeholder="הזן שם יוזר" required>
   </mat-form-field>
   <mat-form-field>
-    <input type="password" matInput [(ngModel)]="password" placeholder="הזן סיסמה" required>
+    <input 
+      type="password" 
+      matInput 
+      [(ngModel)]="password" 
+      placeholder="הזן סיסמה" 
+      (keyup.enter)="login(username, password)" 
+      required>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">בטל</button>
-  <button color="primary" mat-button (click)="login(username, password)" cdkFocusInitial>הכנס</button>
+  <button mat-button (click)="login(username, password)" color="primary" cdkFocusInitial>הכנס</button>
 </div>
 <div>
   <p class="alert alert-danger" *ngIf="isLoginFailed">שם יוזר או סיסמה לא נכון</p>

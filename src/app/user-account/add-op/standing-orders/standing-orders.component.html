@@ -1,56 +1,106 @@
-<div class="row" style="margin-right: 100px;">
-  <form #f="ngForm" (ngSubmit)="verification(f.value)">
-    <h3>הוראת קבע</h3>
-    <h4>אנא למלא את פרטים</h4>
-    <div class="form-group">
-      <label for="companyName">שם חברה</label>
-      <input type="text" #companyName="ngModel" (ngModel)="companyName" id="companyName" name="companyName"
-        class="form-control" required>
-      <div class="alert alert-danger" *ngIf="companyName.touched && companyName.invalid">
-        שם חברה חובה
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="beneficiary">בחר תאריך תחילת</label>
-      
-      <div class="input-group">
-        <input 
-          class="form-control" 
-          placeholder="yyyy-mm-dd" 
-          name="dp" [(ngModel)]="model" 
-          ngbDatepicker #d="ngbDatepicker">
-        <div class="input-group-append">
-          <button 
-            class="btn btn-outline-secondary calendar" 
-            (click)="d.toggle()" 
-            type="button">
-          </button>
-        </div>
-      </div>
 
-      <div class="alert alert-danger" *ngIf="beneficiary.touched && beneficiary.invalid">
-        שם המוטב חובה
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        הגדר הורעת קבע
+      </mat-panel-title>
+      <mat-panel-description>
+        הקים הוראת קבע חדשה
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="row">
+      <div class="col-md-6">
+        <form #f="ngForm" (ngSubmit)="setStandingOrder(f.value)">
+          <h3>הוראת קבע</h3>
+          <h4>אנא למלא את פרטים</h4>
+          <div class="form-group">
+            <label for="companyName">שם חברה</label>
+            <input type="text" #companyName="ngModel" [(ngModel)]="company" id="companyName" name="companyName"
+              class="form-control" required [disabled]="isProcessFinished">
+            <div class="alert alert-danger" *ngIf="companyName.touched && companyName.invalid">
+              שם חברה חובה
+            </div>
+          </div>
+          <div class="form-group">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="תאריך" [formControl]="dateFormControl" [min]="minDate"
+                [disabled]="isProcessFinished">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div class="alert alert-danger" *ngIf="picker.touched && picker.invalid">
+              תאריך חובה
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="amount">סכום</label>
+            <input type="number" #amount="ngModel" [(ngModel)]="num" id="amount" name="amount" class="form-control" required
+              [disabled]="isProcessFinished">
+            <div class="alert alert-danger" *ngIf="amount.touched && amount.invalid">
+              הסכום חובה
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="frecuency">תדירות</label>
+            <select #frecuency="ngModel" (ngModel)="frec" name="frecuency" id="frecuency" class="form-control" required
+              [disabled]="isProcessFinished">
+              <option value=""></option>
+              <option *ngFor="let f of frecuencies" [value]="f.key">
+                {{ f.name }}
+              </option>
+            </select>
+            <div class="alert alert-danger" *ngIf="frecuency.touched && frecuency.invalid">
+              תדירות חובה
+            </div>
+          </div>
+          <button class="btn btn-primary" [disabled]="!f.valid || isProcessFinished ">אשר</button>
+          <button class="btn btn-danger" type="button" (click)="clear()" [disabled]="isProcessFinished">מחק</button>
+          <button class="btn btn-info" type="button" (click)="backToAccountPage()">ביטול</button>
+        </form>
+      </div>
+      <div class="col">
+        <h3 *ngIf="isProcessFinished">הפעולה בוצעה בהצלחה!</h3>
+        <p *ngIf="isProcessFinished">אסמכתא: {{ reference }}</p>
+        <button class="btn btn-info" type="button" (click)="backToAccountPage()" *ngIf="isProcessFinished">חזור
+          לחשבונך</button>
       </div>
     </div>
-    <div class="form-group">
-      <label for="amount">סכום</label>
-      <input type="number" #amount="ngModel" (ngModel)="amount" id="amount" name="amount" class="form-control" required>
-      <div class="alert alert-danger" *ngIf="amount.touched && amount.invalid">
-        הסכום חובה
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="frecuency">תדירות</label>
-      <select #frecuency="ngModel" (ngModel)="frecuency" name="frecuency" id="frecuency" class="form-control" required>
-        <option value=""></option>
-        <option *ngFor="let f of frecuency" [value]="f.key">
-          {{ f.name }}
-        </option>
-      </select>
-      <div class="alert alert-danger" *ngIf="frecuency.touched && frecuency.invalid">
-        תדירות חובה
-      </div>
-    </div>
-    <button class="btn btn-primary">אשר</button>
-    <button class="btn btn-danger" type="button" (click)="cancelTransfer()">מחק</button>
-    <button class="btn btn-info" type="button" (click)="backToAccountPage()">חזור לחשבונך</button>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="refreshStandingOrderList()" (closed)="">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        צפיית הוראות קבע
+      </mat-panel-title>
+      <mat-panel-description>
+        לחץ בהוראת קבע שתרצה לערוך או לבטל
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">סטאטוס</th>
+          <th scope="col">תדירות</th>
+          <th scope="col">סכום</th>
+          <th scope="col">חברה</th>
+          <th scope="col">תאריך</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of standingOrdersList">
+          <th scope="col" (onSelect)="changeStandingOrder(s)">{{ s.status }}</th>
+          <th scope="col" (onSelect)="changeStandingOrder(s)">{{ s.frecuency }}</th>
+          <th scope="col" (onSelect)="changeStandingOrder(s)">{{ s.amount }}</th>
+          <th scope="col" (onSelect)="changeStandingOrder(s)">{{ s.company }}</th>
+          <th scope="col" (onSelect)="changeStandingOrder(s)">{{ s.date | date }}</th>
+        </tr>
+      </tbody>
+    </table>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+
+
+

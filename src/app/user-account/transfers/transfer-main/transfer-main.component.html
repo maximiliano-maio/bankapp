@@ -121,7 +121,7 @@
         הסיבה חובה
       </div>
     </div>
-    <button class="btn btn-primary">אשר</button>
+    <button class="btn btn-primary" [disabled]="!f.valid" >אשר</button>
     <button class="btn btn-danger" type="button" (click)="cancelTransfer()" >מחק</button>
     <button class="btn btn-info" type="button" (click)="backToAccountPage()">חזור לחשבונך</button>
   </form>

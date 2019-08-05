@@ -9,6 +9,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -19,8 +20,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbCalendarGregorian } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import { DataTableModule } from 'angular-6-datatable';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
@@ -79,7 +78,6 @@ import { UserComponent } from './user/user.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
     MatSidenavModule,
@@ -119,8 +117,8 @@ import { UserComponent } from './user/user.component';
     MatSortModule,
     DataTableModule,
     MatDialogModule,
-    NgbCalendarGregorian,
-    CommonModule
+    CommonModule,
+    MatExpansionModule
   ],
   providers: [
     MatDatepickerModule, 

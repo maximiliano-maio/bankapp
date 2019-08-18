@@ -56,5 +56,6 @@ export class UserAccountComponent implements AfterContentInit {
       this.currentUrl = this.router.url;
       
     });
+
   }
 }

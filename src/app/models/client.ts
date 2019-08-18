@@ -1,11 +1,9 @@
-import { ContactInfo } from './contactInfo';
+import { ContactInfo } from 'src/app/models/contactInfo';
 
 export class Client {
-  
  
-  constructor(c) {
+  constructor(c: ContactInfo) {
     this.contactInfo = c;
-    
   }
 
   clientId: String;

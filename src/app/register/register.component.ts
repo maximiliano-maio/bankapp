@@ -39,13 +39,9 @@ export class RegisterComponent {
     this.tabSelected = this.tabSelected - 1;
     this.isConfirmationDisabled = false;
   }
-  // Step 3, and last one, before user validation
+  // Step 3 completed, lead to client's registration and validation
   async confirmationProcess() {
-    this.userService.setClient(
-      await this.browserStorageService.getClient()
-    );
     this.route.navigate(['/user-validation']);
-
   }
 
 }

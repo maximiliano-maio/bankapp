@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { UserService } from './user.service';
+import { Client } from './../../models/client';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,6 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private userService: UserService,
     private router: Router) { }
 
   login(username: string, password: string): Observable<Object> {
@@ -31,10 +30,7 @@ export class AuthService {
 
     let options = { headers: header };
     
-    return this.http.post<Object>('/login/user', {
-      username: username,
-      password: password
-    }, options);
+    return this.http.post<Object>('/login/user', params, options);
   }
 
   isLoggedIn(hashcode: string) {
@@ -71,6 +67,12 @@ export class AuthService {
     this.http.get<boolean>('/logout', options).subscribe(
       (logout) => {
         if (logout) sessionStorage.removeItem('token');
+    });
+  }
+
+  sendValidationCode(client: Client) {
+    this.http.post<void>('/sendValidationCode', client).subscribe(() => {
+      console.log('verfication code request sent..');
     });
   }
 }

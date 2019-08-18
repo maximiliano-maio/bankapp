@@ -100,7 +100,8 @@ import { UserComponent } from './user/user.component';
       { path: 'loans', component: LoansComponent},
       { path: 'user', component: UserComponent},
       { path: 'user-validation', component: UserValidationComponent},
-      { path: '', component: LandingPageComponent}
+      { path: '', component: LandingPageComponent},
+      { path: '**', component: LandingPageComponent }
     ]),
     MatButtonModule,
     MatTabsModule,

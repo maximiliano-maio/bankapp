@@ -1,7 +1,6 @@
-import { Component, Output } from '@angular/core';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { EventEmitter } from '@angular/core';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -50,7 +49,7 @@ export class PersonalInformationComponent {
     sessionStorage.setItem('firstName', this.firstNameFormControl.value);
     sessionStorage.setItem('lastName', this.lastNameFormControl.value);
     sessionStorage.setItem('maritalStatus', this.maritalStatusFormControl.value);
-    sessionStorage.setItem('birthDate', this.birthDateFormControl.value.toDateString());
+    sessionStorage.setItem('birthDate', this.birthDateFormControl.value);
     this.personalInfoCompleted.emit(1);
   }
 

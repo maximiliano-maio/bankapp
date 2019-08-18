@@ -1,0 +1,7 @@
+div {
+  direction: rtl;
+  text-align: right
+}
+button {
+  margin: 15px;
+}

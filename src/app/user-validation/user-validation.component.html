@@ -1,21 +1,33 @@
 <div class="row">
-  <h3> {{ client?.firstName }} הי</h3>
-</div>
-<div class="row">
-  <p>תהליך הרשמה כמעט הסתיים, יש לאמת את פרטי ההתקשרות עכשיו או ללחוץ בדילוג ולהשלים את התהליך אחר כך</p>
-</div>
-
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">נשלח לך קוד אימות לפרט ההתקשרות</h5>
-    <h6 *ngIf="sending === 3" class="card-subtitle mb-2 text-muted">{{ client?.contactInfo.cellphone }}</h6>
-    <h6 *ngIf="sending === 2" class="card-subtitle mb-2 text-muted">{{ client?.contactInfo.email }}</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
-    </p>
-    <button #validationContact class="card-link">אימות</button>
-    <a routerLink="/home" class="card-link">דילוג</a>
+  <div class="col-md-6" *ngIf="!isRegistrationCompleted">
+    <p>בעיבוד המערכת. אנא המתן...</p>
+  </div>
+  <div class="col" *ngIf="isRegistrationCompleted">
+    <h3> {{ client?.firstName }} הי</h3>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">נשלח קוד אימות לניידך</h5>
+        <p class="card-subtitle mb-2 text-muted" disabled>
+          {{ client?.contactInfo.cellphone }}
+        </p>
+        <p class="card-text">ניתן לאמת את חשבונך תוך 5 דקות.
+        </p>
+        <form #f="ngForm" (ngSubmit)="validateCode(f.value)">
+          <input 
+            type="String" 
+            #validation="ngModel"
+            ngModel 
+            id="validation" 
+            name="validation" 
+            class="form-control" 
+            required>
+          <button class="btn btn-primary" [disabled]="!f.valid">אימות</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
+
 
   
      

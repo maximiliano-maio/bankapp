@@ -34,7 +34,6 @@ export class UserService {
     return this.http.get<Client[]>('/getClients');
   }
 
-  // TODO: Get Hashcode locally..
   getHashcodeLocally(): string {
     return sessionStorage.getItem('token');
   }

@@ -9,6 +9,7 @@ import { Client } from './../../models/client';
   providedIn: 'root'
 })
 export class AuthService {
+  
 
   constructor(
     private http: HttpClient,
@@ -74,5 +75,13 @@ export class AuthService {
     this.http.post<void>('/sendValidationCode', client).subscribe(() => {
       console.log('verfication code request sent..');
     });
+  }
+
+  validateCode(data: Object): Observable<boolean> {
+    return this.http.post<boolean>('/validateCode', data);
+  }
+
+  setCredential(data: Object): Observable<boolean> {
+    return this.http.post<boolean>('/setCredential', data);
   }
 }

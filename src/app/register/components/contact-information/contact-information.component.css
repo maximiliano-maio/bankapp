@@ -1,3 +1,7 @@
-div.col {
-  text-align: center;
+div.col, div.row {
+  text-align: right;
+  direction: rtl;
+}
+li {
+  text-align: right;
 }

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 import { User } from './../models/user';
 import { AuthService } from './../shared/services/auth.service';
@@ -18,8 +17,7 @@ export class LoginComponent {
 
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
-    private authService: AuthService,
-    private route: Router) { }
+    private authService: AuthService) { }
   
   onNoClick(): void {
     this.dialogRef.close();
@@ -27,21 +25,12 @@ export class LoginComponent {
 
   login(username: string, password: string) {
     this.authService.login(username, password).subscribe((user: User) => {
-      
-      // for testing purpose:
-      console.log(user);
-      
       if (!user) {
         this.loginResponse.emit(null);
-        console.log('login failed.');
       } else {
         this.loginResponse.emit(user);
-        console.log('login succeed.');
         sessionStorage.setItem('token', user.hashcode);
-        
       }
-      
-      
     });
     
     // TODO: Redirect to Account page

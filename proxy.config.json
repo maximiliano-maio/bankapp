@@ -63,5 +63,15 @@
     "target": "http://localhost:8100",
     "secure": false,
     "changeOrigin": false
+  },
+  "/validateCode": {
+    "target": "http://localhost:8100",
+    "secure": false,
+    "changeOrigin": false
+  },
+  "/setCredential": {
+    "target": "http://localhost:8100",
+    "secure": false,
+    "changeOrigin": false
   }
 }

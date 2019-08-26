@@ -1,4 +1,4 @@
-<form>
+<form #f="ngForm" (ngSubmit)="savePersonalInformation()">
   <div class="row" style="margin-top: 20px; min-height: 400px; ">
     <div class="col-md-6">
       <div class="form-group" style="text-align: right;">
@@ -63,5 +63,9 @@
     </div>
     
   </div>
-  <button class="btn btn-primary" (click)="savePersonalInformation()">המשך</button>
+  <button 
+    class="btn btn-primary" 
+    [disabled]="idNumberFormControl.invalid || firstNameFormControl.invalid || lastNameFormControl.invalid || birthDateFormControl.invalid">
+    המשך
+  </button>
 </form>

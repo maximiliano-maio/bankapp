@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col-md-6" *ngIf="!isRegistrationCompleted">
+  <div class="col-md-6" *ngIf="!isRegistrationCompleted && !isValidationCompleted">
     <p>בעיבוד המערכת. אנא המתן...</p>
   </div>
-  <div class="col" *ngIf="isRegistrationCompleted">
+  <div class="col-md-6" *ngIf="isRegistrationCompleted && !isValidationCompleted">
     <h3> {{ client?.firstName }} הי</h3>
     <div class="card" style="width: 18rem;">
       <div class="card-body">
@@ -12,9 +12,9 @@
         </p>
         <p class="card-text">ניתן לאמת את חשבונך תוך 5 דקות.
         </p>
-        <form #f="ngForm" (ngSubmit)="validateCode(f.value)">
+        <form #f="ngForm" (ngSubmit)="validateCode(f.value.validation)">
           <input 
-            type="String" 
+            type="number" 
             #validation="ngModel"
             ngModel 
             id="validation" 
@@ -23,8 +23,50 @@
             required>
           <button class="btn btn-primary" [disabled]="!f.valid">אימות</button>
         </form>
+        <div *ngIf="isValidationFailed">
+          <p>הוזן קוד אימות שגוי. לקבלת קוד אימות חדש להקליק בשליחה חוזרת</p>
+          <button (click)="sendValidationCode()">שליחה חוזרת</button>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="col-md-6" *ngIf="isValidationCompleted">
+    <form #userForm="ngForm" (ngSubmit)="setCredential(userForm.value)">
+      <h3>אנא להגדיר את שם היוזר ואת הסיסמה לשימוש בכניסה לחשבונך:</h3>
+      <div class="form-group">
+        <label for="username">הכנס יוזר</label>
+        <input #username="ngModel" ngModel name="username" id="username" class="form-control" type="text" required>
+        <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
+          היוזר המוכנס אינו תקין
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password1">הכנס סיסמה</label>
+        <input 
+          #password1="ngModel" ngModel 
+          name="password1" id="password1" 
+          class="form-control" type="password" 
+          required>
+        <div class="alert alert-danger" *ngIf="password1.touched && password1.invalid">
+          הסיסמה אינה חוקית
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password2">הכנס פעם שנייה אותה סיסמה</label>
+        <input 
+          #password2="ngModel" ngModel 
+          name="password2" id="password2" 
+          class="form-control" type="password" 
+          required (keyup)="passwordVerification(password1.value, password2.value)">
+        <div class="alert alert-danger" *ngIf="password2.touched && !isPasswordMatched">
+          הסיסמה אינה תואמת
+        </div>
+      </div>
+      <button class="btn btn-primary" [disabled]="!isPasswordMatched">אישור</button>
+    </form>
+    <h4 style="color: green" *ngIf="isRegistrationFinished">
+      ההרשמה בוצעה בהצלחה. תיבוצע העברה לדף הבית...
+    </h4>
   </div>
 </div>
 

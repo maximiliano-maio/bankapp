@@ -1,99 +1,90 @@
-<div class="row">
-  <div class="col">
-    <form #form="ngForm">
-    
+<form #form="ngForm" (ngSubmit)="saveContactInfo();">
+  <div class="row">
+  
+    <div class="col-md-6">
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="כתובת" [formControl]="streetFormControl" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="streetFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="מספר בית" [formControl]="buildingNumberFormControl" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="buildingNumberFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
-    
+      
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="כניסה" [formControl]="entranceFormControl" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="entranceFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="מספר דירה" [formControl]="apartmentFormControl" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="apartmentFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
-    
+      
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="מיקוד" [formControl]="postalCodeFormControl" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="postalCodeFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="תא דואר" [formControl]="postalBoxFormControl" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="postalBoxFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
-    
+      
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="ישוב" [formControl]="cityFormControl" [errorStateMatcher]="matcher">
-          <mat-error *ngIf="cityFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
-    
+      
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="טלפון" [formControl]="telephoneFormControl" [errorStateMatcher]="matcher">
           <mat-error *ngIf="telephoneFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
-    
+      <div class="form-group">
+        <label>הסכמה לשליחת מכתבים</label>
+        <mat-radio-group [formControl]="distributionFormControl">
+          <ul style="list-style-type: none">
+            <li>
+              <mat-radio-button value="1" labelPosition="after">דואר ישראל</mat-radio-button>
+            </li>
+            <li>
+              <mat-radio-button value="2" labelPosition="after">דואר אלקטרוני</mat-radio-button>
+            </li>
+            <li>
+              <mat-radio-button value="3" labelPosition="after">סמס</mat-radio-button>
+            </li>
+            <li>
+              <mat-radio-button value="4" labelPosition="after">לא ידוע</mat-radio-button>
+            </li>
+            <li>
+              <mat-radio-button value="5" labelPosition="after">לא מסכים</mat-radio-button>
+            </li>
+          </ul>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div class="col">
+      <h5>שדות חובה:</h5>
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="טלפון נייד" [formControl]="cellphoneFormControl" [errorStateMatcher]="matcher">
           <mat-error *ngIf="cellphoneFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
-    
       <div class="form-group">
         <mat-form-field>
           <input matInput placeholder="דואר אלקטרוני" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
           <mat-error *ngIf="emailFormControl.invalid">שדה חובה</mat-error>
         </mat-form-field>
       </div>
-    
-      <div class="form-group" style="text-align: right;">
-        <label>הסכמה לשליחת מכתבים</label>
-        <mat-radio-group [formControl]="distributionFormControl">
-          <ul style="list-style-type: none">
-            <li>
-              <mat-radio-button value="1" labelPosition="before">דואר ישראל</mat-radio-button>
-            </li>
-            <li>
-              <mat-radio-button value="2" labelPosition="before">דואר אלקטרוני</mat-radio-button>
-            </li>
-            <li>
-              <mat-radio-button value="3" labelPosition="before">סמס</mat-radio-button>
-            </li>
-            <li>
-              <mat-radio-button value="4" labelPosition="before">לא ידוע</mat-radio-button>
-            </li>
-            <li>
-              <mat-radio-button value="5" labelPosition="before">לא מסכים</mat-radio-button>
-            </li>
-          </ul>
-        </mat-radio-group>
-      </div>
-    
-      <button class="btn btn-primary" (click)="saveContactInfo()">המשך</button>
-    </form>
+    </div>
   </div>
-</div>
-
+  <button class="btn btn-primary" [disabled]="cellphoneFormControl.invalid || emailFormControl.invalid">המשך</button>
+</form>

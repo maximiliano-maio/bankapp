@@ -1,7 +1,8 @@
-import { BrowserStorageService } from './../../../shared/services/browser-storage.service';
-import { Component, Output, EventEmitter } from '@angular/core';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+import { BrowserStorageService } from './../../../shared/services/browser-storage.service';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -20,29 +21,23 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class ContactInformationComponent {
 
-  streetFormControl = new FormControl('', [ 
-    Validators.required
-  ]);
-  buildingNumberFormControl = new FormControl('', [ 
-    Validators.required
-  ]);
+  streetFormControl = new FormControl();
+  buildingNumberFormControl = new FormControl();
   entranceFormControl = new FormControl();
-  apartmentFormControl = new FormControl('', [ 
-    Validators.required
-  ]);
-  postalCodeFormControl = new FormControl('', [ 
-    Validators.required
-  ]);
+  apartmentFormControl = new FormControl();
+  postalCodeFormControl = new FormControl();
   postalBoxFormControl = new FormControl();
-  cityFormControl = new FormControl('', [ 
-    Validators.required
-  ]);
+  cityFormControl = new FormControl();
   telephoneFormControl = new FormControl();
-  cellphoneFormControl = new FormControl();
-  emailFormControl = new FormControl();
-  distributionFormControl = new FormControl('', [ 
+  distributionFormControl = new FormControl();
+  
+  cellphoneFormControl = new FormControl('', [
     Validators.required
   ]);
+  emailFormControl = new FormControl('', [
+    Validators.required
+  ]);
+  
 
   @Output() contactInfoCompleted: EventEmitter<any> = new EventEmitter<any>();
 
@@ -63,6 +58,7 @@ export class ContactInformationComponent {
     this.browserStorageService.setSessionStorageItem('distribution', this.distributionFormControl.value );
 
     this.contactInfoCompleted.emit(1);
+
   }
   
 

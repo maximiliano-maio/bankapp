@@ -27,9 +27,9 @@ export class StandingOrdersComponent {
   num: number;
 
   frecuencies = [
-    { key: 1, name: 'שבועי' },
-    { key: 2, name: 'חודשי' },
-    { key: 3, name: 'שנתי' }
+    { key: 0, name: 'שבועית' },
+    { key: 1, name: 'חודשית' },
+    { key: 2, name: 'שנתית' }
   ];
   
 

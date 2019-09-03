@@ -14,10 +14,13 @@ export class LoginComponent {
   @Output() loginResponse = new EventEmitter<User>(true);
 
   user: User;
+  isLoginFailed: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<LoginComponent>,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+      this.isLoginFailed = false;
+    }
   
   onNoClick(): void {
     this.dialogRef.close();
@@ -26,6 +29,7 @@ export class LoginComponent {
   login(username: string, password: string) {
     this.authService.login(username, password).subscribe((user: User) => {
       if (!user) {
+        this.isLoginFailed = true;
         this.loginResponse.emit(null);
       } else {
         this.loginResponse.emit(user);
@@ -33,7 +37,6 @@ export class LoginComponent {
       }
     });
     
-    // TODO: Redirect to Account page
   }
 
 

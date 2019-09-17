@@ -53,6 +53,9 @@ export class AccountingService {
     return this.http.post<any>('/verifyTransferFromAccount', data, options);
   }
 
+  /*
+   * @deprecated since September, 17th
+  
   setStandingOrder(data: Object): Observable<any> {
     let header = new HttpHeaders({
       'Content-Type': 'application/json'
@@ -60,6 +63,21 @@ export class AccountingService {
 
     let options = {
       headers: header
+    };
+
+    return this.http.post<any>('/setStandingOrder', data, options);
+
+  }
+  */
+
+  setStandingOrder(data: Object, hashcode: string): Observable<any> {
+    let header = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    let options = {
+      headers: header,
+      params: { code: hashcode }
     };
 
     return this.http.post<any>('/setStandingOrder', data, options);

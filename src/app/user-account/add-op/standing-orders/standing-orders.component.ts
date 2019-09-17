@@ -47,13 +47,13 @@ export class StandingOrdersComponent {
   setStandingOrder(data) {
     let hashcode = this.router.url.substring(9, this.router.url.lastIndexOf('/'));
     let date = this.datePipe.transform(this.dateFormControl.value, 'yyyy-MM-dd');
-    Object.assign(data, { hashcode: hashcode });
+    // @Deprecated: Object.assign(data, { hashcode: hashcode }); 
     Object.assign(data, { date: date });
     
     // TEST ONLY
     console.log(data);
     
-    this.accoutingService.setStandingOrder(data).subscribe(
+    this.accoutingService.setStandingOrder(data, hashcode).subscribe(
       (res: any) => {
         this.reference = res['id'];
         if (this.reference) this.isProcessFinished = !this.isProcessFinished;
